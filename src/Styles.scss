@@ -39,6 +39,14 @@ $font: "Changa", sans-serif;
   width: 1px;
   background-color: rgb(100, 100, 100);
 }
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(202, 202, 186);
+  position: relative;
+}
+
 nav {
   height: 60px;
   width: 100%;
@@ -115,8 +123,147 @@ nav {
           background-repeat: no-repeat;
           height: 20px;
           width: 20px;
+          background-image: url("/icons/light-bulb-off.svg");
+          transition: background-image 0.5s;
+          cursor: pointer;
+
+          &.dark {
+            background-image: url("/icons/light-bulb-on.svg");
+          }
+        }
+
+        .language {
+          position: relative;
+
+          .language-cont {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            border-radius: 5px;
+            height: 20px;
+            width: 30px;
+            overflow: hidden;
+
+            img {
+              height: 20px;
+              width: 20px;
+              margin: 0 10px;
+            }
+
+            p {
+              width: 60px;
+              font-size: 14px;
+            }
+
+            .selected {
+              @include flex($justify: baseline);
+              border-bottom: 1px solid $gray;
+              padding-bottom: 5px;
+              margin-bottom: 5px;
+              cursor: pointer;
+            }
+
+            .option {
+              @include flex($justify: baseline);
+              cursor: pointer;
+              border-radius: 5px;
+
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+              }
+            }
+          }
+          &.show {
+            .language-cont {
+              transition: height 0.5s, width 0.2s;
+              height: 120px;
+              width: 110px;
+            }
+          }
         }
       }
     }
+  }
+}
+
+.footer {
+  background-color: $beige;
+  width: 100%;
+  color: $black;
+  padding: 20px 0;
+  font-family: $font;
+  position: absolute;
+  bottom: 0;
+  box-shadow: $shadow-one;
+
+  .footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+    .footer-section {
+      flex: 1;
+      margin: 0 10px;
+
+      h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid $gray;
+        padding-bottom: 5px;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin: 5px 0;
+
+          a {
+            text-decoration: none;
+            color: $gray;
+            font-size: 14px;
+            transition: color 0.3s;
+
+            &:hover {
+              color: $black;
+            }
+          }
+        }
+      }
+
+      .social-icons {
+        display: flex;
+        margin-top: 10px;
+
+        a {
+          margin-right: 10px;
+
+          img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #555;
+    margin-top: 20px;
   }
 }

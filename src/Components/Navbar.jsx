@@ -1,8 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
+import ThemeContext from "../Helpers/ThemeContext";
+import { useContext, useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ handleLanguageClick, langCont }) => {
+  const srpski = { flag: "flags/srb.png", alt: "srb", name: "Srpski" };
+  const english = { flag: "flags/eng.png", alt: "eng", name: "English" };
+  const ruski = { flag: "flags/rus.png", alt: "rus", name: "Ruski" };
+
+  const [language, setLanguage] = useState("srb");
+  const [activeLanguage, setActiveLanguage] = useState(srpski);
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
-    <nav>
+    <nav className={theme}>
       <div className="nav-container">
         <Link to="/">
           <img src="/fence.svg" alt="logo" />
@@ -41,8 +52,31 @@ const Navbar = () => {
               className="nav-link"
             ></Link>
             <div className="horizontal-separator"></div>
-            <button className="nav-button theme"></button>
-            <button className="nav-button language"></button>
+            <button className={theme} onClick={toggleTheme}></button>
+            <div
+              className={`language ${langCont}`}
+              onClick={handleLanguageClick}
+            >
+              <div className="language-cont">
+                <div className="selected">
+                  <img src={activeLanguage.flag} alt={activeLanguage.alt} />
+                  <p>{activeLanguage.name}</p>
+                </div>
+
+                <div className="option" onClick={() => setActiveLanguage(srpski)}>
+                  <img src="flags/srb.png" alt="srb" />
+                  <p>Srpski</p>
+                </div>
+                <div className="option" onClick={() => setActiveLanguage(english)}>
+                  <img src="flags/eng.png" alt="eng" />
+                  <p>English</p>
+                </div>
+                <div className="option" onClick={() => setActiveLanguage(ruski)}>
+                  <img src="flags/rus.png" alt="rus" />
+                  <p>Russian</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
